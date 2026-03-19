@@ -95,6 +95,40 @@ Stop it with:
 npm run stop:bg
 ```
 
+## Docker Deployment
+
+If you prefer to run the bridge in Docker instead of a local Node process:
+
+```bash
+cp .env.example .env
+docker compose up -d --build
+```
+
+Or with npm shortcuts:
+
+```bash
+npm run docker:up
+```
+
+View logs:
+
+```bash
+npm run docker:logs
+```
+
+Stop it:
+
+```bash
+npm run docker:down
+```
+
+Important:
+
+1. Kiro still runs on the host machine
+2. The bridge runs inside Docker
+3. Kiro should still point to `http://127.0.0.1:8765`
+4. You still need to apply Kiro settings on the host using `npm run setup` or manual settings edits
+
 ## Update Flow
 
 After cloning from GitHub, you can update with:
@@ -200,6 +234,7 @@ Important files:
 - Remote MCP support is still minimal compatibility, not a full remote MCP bridge
 - This project assumes an OpenAI-compatible backend
 - The bridge must be running locally while Kiro is configured to use it
+- Docker runs the bridge service only; it does not containerize the Kiro desktop app itself
 
 ## Kiro Update Notes
 

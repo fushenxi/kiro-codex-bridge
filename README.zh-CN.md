@@ -95,6 +95,40 @@ npm run start:bg
 npm run stop:bg
 ```
 
+## Docker 部署
+
+如果你不想在本机直接跑 Node，也可以把 bridge 放进 Docker：
+
+```bash
+cp .env.example .env
+docker compose up -d --build
+```
+
+或者直接用 npm 快捷命令：
+
+```bash
+npm run docker:up
+```
+
+查看日志：
+
+```bash
+npm run docker:logs
+```
+
+停止：
+
+```bash
+npm run docker:down
+```
+
+需要注意：
+
+1. Kiro 桌面端仍然运行在宿主机上
+2. 容器里运行的是 bridge 服务
+3. 宿主机里的 Kiro 仍然应当连接 `http://127.0.0.1:8765`
+4. Kiro 的 settings 仍然要在宿主机侧写入，可以继续用 `npm run setup` 或手动修改
+
 ## 更新方式
 
 从 GitHub 拉取后，可以直接执行：
@@ -200,6 +234,7 @@ bridge 会把调试快照写到：
 - 远程 MCP 目前还是最小兼容层，不是完整 remote MCP bridge
 - 当前默认假设后端是 OpenAI 兼容接口
 - 只要 Kiro 还指向这个 bridge，本地 `server.mjs` 就必须保持运行
+- Docker 只容器化 bridge 服务，不会把 Kiro 桌面端本身一起容器化
 
 ## Kiro 更新注意事项
 

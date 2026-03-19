@@ -1,0 +1,24 @@
+services:
+  kiro-codex-bridge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kiro-codex-bridge
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5.4}
+      KIRO_SHIM_HOST: 0.0.0.0
+      KIRO_SHIM_PORT: ${KIRO_SHIM_PORT:-8765}
+      KIRO_SHIM_REGION: ${KIRO_SHIM_REGION:-us-east-1}
+      KIRO_SHIM_MODEL_ID: ${KIRO_SHIM_MODEL_ID:-gpt-5.4}
+      KIRO_SHIM_MODEL_NAME: ${KIRO_SHIM_MODEL_NAME:-Codex GPT-5.4}
+    ports:
+      - "127.0.0.1:8765:8765"
+    volumes:
+      - ./.debug:/app/.debug
+      - ./.runtime:/app/.runtime
