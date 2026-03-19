@@ -69,6 +69,12 @@ OPENAI_MODEL=gpt-5.4
 npm run setup -- --endpoint http://127.0.0.1:8765 --model gpt-5.4
 ```
 
+如果是 Kiro 刚升级过，想在重写 bridge 配置的同时记录当前安装版本，可以直接执行：
+
+```bash
+npm run adapt:kiro -- --endpoint http://127.0.0.1:8765 --model gpt-5.4
+```
+
 启动 bridge：
 
 ```bash
@@ -102,6 +108,8 @@ npm run update
 1. 停掉当前本地 bridge
 2. 执行 `git pull --ff-only`
 3. 如果之前在运行，则自动重新启动
+
+如果升级的是 Kiro 本体，建议升级后额外执行一次 `adapt:kiro`，然后再跑最小回归清单。
 
 ## Kiro 配置效果
 
@@ -143,6 +151,18 @@ curl -s http://127.0.0.1:8765/debug/recent-turns
 
 ```bash
 npm run doctor
+```
+
+Kiro 版本适配报告：
+
+```bash
+npm run adapt:kiro -- --endpoint http://127.0.0.1:8765 --model gpt-5.4
+```
+
+它会生成本地报告文件：
+
+```bash
+.runtime/kiro-adaptation-report.json
 ```
 
 ## 调试文件

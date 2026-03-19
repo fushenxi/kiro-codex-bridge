@@ -9,6 +9,7 @@
     "start": "node server.mjs",
     "setup": "node scripts/setup.mjs",
     "doctor": "node scripts/doctor.mjs",
+    "adapt:kiro": "node scripts/adapt-kiro.mjs",
     "start:bg": "bash scripts/start-background.sh",
     "stop:bg": "bash scripts/stop-background.sh",
     "update": "bash scripts/update.sh"

@@ -69,6 +69,12 @@ Then patch Kiro settings:
 npm run setup -- --endpoint http://127.0.0.1:8765 --model gpt-5.4
 ```
 
+If Kiro was just updated and you want to re-apply bridge settings while recording the currently installed Kiro version, run:
+
+```bash
+npm run adapt:kiro -- --endpoint http://127.0.0.1:8765 --model gpt-5.4
+```
+
 Start the bridge:
 
 ```bash
@@ -102,6 +108,8 @@ This will:
 1. stop the local bridge if it is running
 2. pull the latest code with `git pull --ff-only`
 3. restart the bridge if it was already running
+
+If Kiro itself was updated, run `adapt:kiro` after the update and then execute the regression checklist.
 
 ## Kiro Settings
 
@@ -143,6 +151,18 @@ Local environment doctor:
 
 ```bash
 npm run doctor
+```
+
+Kiro adaptation report:
+
+```bash
+npm run adapt:kiro -- --endpoint http://127.0.0.1:8765 --model gpt-5.4
+```
+
+This writes a local report to:
+
+```bash
+.runtime/kiro-adaptation-report.json
 ```
 
 ## Debug Artifacts
