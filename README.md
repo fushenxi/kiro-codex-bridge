@@ -25,6 +25,21 @@ This project translates between:
 - Trusted command flows
 - Basic MCP Playwright flows
 
+## Verified Kiro Version
+
+This bridge is currently verified against the following Kiro build:
+
+- Kiro version: `0.11.34`
+- VS Code core: `1.107.1`
+- Commit: `7b506f30719296ba4f1aebfe383b426ffce0913e`
+- Build date: `2026-03-12T22:08:23.020Z`
+- Electron: `39.6.0`
+- Chromium: `142.0.7444.265`
+- Node.js: `22.22.0`
+- OS tested: `Darwin arm64 25.2.0`
+
+It may work on nearby Kiro versions, but only the version above has been explicitly validated.
+
 ## How It Works
 
 1. Kiro sends model discovery and chat requests to this local bridge.
@@ -166,6 +181,29 @@ Important files:
 - This project assumes an OpenAI-compatible backend
 - The bridge must be running locally while Kiro is configured to use it
 
+## Kiro Update Notes
+
+Treat every Kiro update as a compatibility event.
+
+Recommended update workflow:
+
+1. Back up your working Kiro app and user settings
+2. Keep the bridge repo and `.env` unchanged
+3. Update Kiro
+4. Start the bridge
+5. Run a short regression checklist before daily use
+
+Recommended regression checklist:
+
+1. file create + read
+2. `pwd`
+3. short background process `start -> read -> stop`
+4. one MCP browser action
+5. one spec generation
+6. one `tasks.md` execution
+
+If any of those fail after a Kiro update, assume the internal tool protocol changed and re-verify before continuing normal use.
+
 ## Safety Notes
 
 - Do not commit your `.env`
@@ -176,4 +214,3 @@ Important files:
 
 - [Chinese README](./README.zh-CN.md)
 - [Test Matrix](./TEST_MATRIX.md)
-
