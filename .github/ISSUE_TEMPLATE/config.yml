@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Chinese README
+    url: https://github.com/fushenxi/kiro-codex-bridge/blob/main/README.zh-CN.md
+    about: Read the Chinese setup and update guide first.
+  - name: English README
+    url: https://github.com/fushenxi/kiro-codex-bridge/blob/main/README.md
+    about: Read the English setup, update, and diagnostics guide first.

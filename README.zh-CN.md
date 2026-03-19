@@ -2,6 +2,10 @@
 
 # Kiro Codex Bridge
 
+[![CI](https://github.com/fushenxi/kiro-codex-bridge/actions/workflows/ci.yml/badge.svg)](https://github.com/fushenxi/kiro-codex-bridge/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/fushenxi/kiro-codex-bridge?display_name=tag)](https://github.com/fushenxi/kiro-codex-bridge/releases)
+[![License](https://img.shields.io/github/license/fushenxi/kiro-codex-bridge)](./LICENSE)
+
 通过 `codewhisperer.config.endpoints` 把 OpenAI/Codex 接入 Kiro，同时尽量保留 Kiro 原生的工作流能力。
 
 这个项目主要负责在三层之间做协议转换：
@@ -283,6 +287,38 @@ bridge 会把调试快照写到：
 - 不要提交 `.env`
 - 不要把 API key 硬编码进源码
 - 每次 Kiro 更新后都建议重新跑一遍回归测试
+
+## FAQ
+
+### 是否必须一直保持 `server.mjs` 运行？
+
+是的。因为 Kiro 已经被配置为把模型请求发到本地 bridge，如果 bridge 没启动，Kiro 就无法访问这条桥接模型链路。
+
+### 可以把 bridge 放进 Docker 吗？
+
+可以。bridge 可以放进 Docker 运行，但 Kiro 桌面端本身仍然运行在宿主机。宿主机里的 Kiro 仍然应连接 `http://127.0.0.1:8765`。
+
+### Kiro 升级后应该做什么？
+
+先执行：
+
+```bash
+npm run adapt:kiro -- --endpoint http://127.0.0.1:8765 --model gpt-5.4
+```
+
+然后按 README 里的最小回归清单再跑一遍，确认没有兼容性问题后再恢复日常使用。
+
+### 为什么工具执行会比原生 Kiro 慢一点？
+
+因为请求现在要额外经过一层 bridge：
+
+`Kiro -> bridge -> OpenAI 兼容后端 -> bridge -> Kiro`
+
+如果同时叠加 Hooks、Specs、子代理、多轮工具调用，整体时延会更明显。
+
+### 是否所有 Kiro 工具都保证可用？
+
+不能绝对保证。当前已经验证了一批高频工具和核心工作流，但 Kiro 更新后或较少见的工具能力，仍然建议重新验证。
 
 ## 相关文件
 

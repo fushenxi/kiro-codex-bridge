@@ -2,6 +2,10 @@
 
 # Kiro Codex Bridge
 
+[![CI](https://github.com/fushenxi/kiro-codex-bridge/actions/workflows/ci.yml/badge.svg)](https://github.com/fushenxi/kiro-codex-bridge/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/fushenxi/kiro-codex-bridge?display_name=tag)](https://github.com/fushenxi/kiro-codex-bridge/releases)
+[![License](https://img.shields.io/github/license/fushenxi/kiro-codex-bridge)](./LICENSE)
+
 Bridge OpenAI/Codex into Kiro through `codewhisperer.config.endpoints` while keeping as much of Kiro's native workflow as possible.
 
 This project translates between:
@@ -283,6 +287,38 @@ If any of those fail after a Kiro update, assume the internal tool protocol chan
 - Do not commit your `.env`
 - Do not hardcode API keys into the source
 - Re-run your regression checklist after every Kiro update
+
+## FAQ
+
+### Do I need to keep `server.mjs` running?
+
+Yes. Kiro is configured to send model traffic to the local bridge endpoint. If the bridge is not running, Kiro cannot reach the bridged model.
+
+### Can I run the bridge in Docker instead of directly on the host?
+
+Yes. The bridge can run in Docker, but Kiro still runs on the host machine. Kiro should keep pointing to `http://127.0.0.1:8765`.
+
+### What should I do after updating Kiro?
+
+Run:
+
+```bash
+npm run adapt:kiro -- --endpoint http://127.0.0.1:8765 --model gpt-5.4
+```
+
+Then run the regression checklist from this README before returning to daily use.
+
+### Why can tool execution feel slower than native Kiro?
+
+Because requests pass through an extra bridge layer:
+
+`Kiro -> bridge -> OpenAI-compatible backend -> bridge -> Kiro`
+
+Hooks, specs, subagents, and multi-step tool loops can add more latency on top of that.
+
+### Is every Kiro tool guaranteed to work?
+
+No. The bridge has already validated a meaningful set of Kiro-native tools and workflows, but Kiro updates and less common tools may still require re-validation.
 
 ## Related Files
 

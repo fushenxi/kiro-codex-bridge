@@ -1,5 +1,6 @@
 .debug/
 .runtime/
+dist/
 .env
 .env.local
 .env.*.local

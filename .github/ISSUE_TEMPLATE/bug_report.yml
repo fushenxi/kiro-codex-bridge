@@ -1,0 +1,52 @@
+name: Bug report
+description: Report a bridge failure, tool mismatch, or workflow regression
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting this issue.
+        Please include enough detail to reproduce the problem, especially the Kiro version and the tool/workflow involved.
+  - type: input
+    id: kiro_version
+    attributes:
+      label: Kiro version
+      description: Example: 0.11.34
+      placeholder: 0.11.34
+    validations:
+      required: true
+  - type: input
+    id: bridge_version
+    attributes:
+      label: Bridge version
+      description: Example: v0.1.0 or commit SHA
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Prompt or user action
+      description: What did you ask Kiro to do, or what UI action did you trigger?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: debug
+    attributes:
+      label: Debug evidence
+      description: Include `/debug/coverage`, `/debug/recent-turns`, screenshots, or relevant `.debug` excerpts if possible.
+

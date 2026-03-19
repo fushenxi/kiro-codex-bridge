@@ -1,0 +1,40 @@
+name: Compatibility report
+description: Report results after testing a new Kiro version
+title: "[Compatibility] "
+labels:
+  - compatibility
+body:
+  - type: input
+    id: kiro_version
+    attributes:
+      label: Kiro version tested
+      placeholder: 0.11.34
+    validations:
+      required: true
+  - type: input
+    id: vscode_core
+    attributes:
+      label: VS Code core version
+      placeholder: 1.107.1
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: macOS / Windows / Linux
+  - type: textarea
+    id: passed
+    attributes:
+      label: Passed checks
+      description: List the flows that worked, such as file create/read, specs, MCP browser, background process lifecycle.
+    validations:
+      required: true
+  - type: textarea
+    id: failed
+    attributes:
+      label: Failed checks
+      description: List anything that regressed or behaved differently.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Extra notes
+

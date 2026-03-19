@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest a new compatibility layer, workflow improvement, or deployment feature
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What pain point are you trying to solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Is this about Kiro compatibility, tool coverage, Docker, CI, release flow, or docs?
+
