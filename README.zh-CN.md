@@ -145,6 +145,25 @@ npm run update
 
 如果升级的是 Kiro 本体，建议升级后额外执行一次 `adapt:kiro`，然后再跑最小回归清单。
 
+## GitHub Actions 与 Release 压缩包
+
+仓库现在自带：
+
+1. CI 工作流
+   - 检查 bridge 脚本语法
+   - 检查 `docker compose config`
+
+2. Release 工作流
+   - 自动打包 zip 压缩包
+   - 作为 workflow artifact 上传
+   - 当你 push `v*` tag 时自动发布到 GitHub Releases
+
+本地手动生成 release 压缩包：
+
+```bash
+npm run build:release
+```
+
 ## Kiro 配置效果
 
 `setup` 脚本会向 Kiro 写入等价配置：

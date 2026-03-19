@@ -145,6 +145,25 @@ This will:
 
 If Kiro itself was updated, run `adapt:kiro` after the update and then execute the regression checklist.
 
+## GitHub Actions And Release Bundle
+
+This repo includes:
+
+1. CI workflow
+   - syntax checks for bridge scripts
+   - `docker compose config` validation
+
+2. Release workflow
+   - builds a zip bundle
+   - uploads it as a workflow artifact
+   - publishes it to GitHub Releases when you push a `v*` tag
+
+Create a release archive locally with:
+
+```bash
+npm run build:release
+```
+
 ## Kiro Settings
 
 The setup script writes the equivalent of:
